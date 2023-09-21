@@ -1,6 +1,7 @@
+
+
 import React,{useState} from "react";
 import './../styles/App.css';
-import Child from "./Child";
 
 const App = () => {
   const [todos, setTodos] = useState([
@@ -26,7 +27,25 @@ const App = () => {
   return (
     <div id="main">
       <h1>Parent component</h1>
-      <Child todos={todos} handleCompleteTodo={handleCompleteTodo} />
+      <ChildComponent todos={todos} handleCompleteTodo={handleCompleteTodo} />
+    </div>
+  );
+}
+
+const ChildComponent = ({ todos, handleCompleteTodo }) => {
+  return (
+    <div id="child">
+      <h2>Child Component</h2>
+          {
+            todos.map((todo, index) => (
+            <li key={index}>
+              {todo.title}
+              {!todo.completed && (
+                <button onClick={() => handleCompleteTodo(index)}>Complete</button>
+              )}
+            </li>
+          ))
+          }
     </div>
   );
 }
